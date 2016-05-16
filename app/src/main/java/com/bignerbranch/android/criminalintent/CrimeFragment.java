@@ -23,6 +23,8 @@ public class CrimeFragment extends android.support.v4.app.Fragment {
             "com.bignerbranch.android.criminalintent.crime_id";
 
     private static final String DIALOG_DATE = "date";
+    private static final int REQUEST_DATE = 0;
+
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -75,7 +77,9 @@ public class CrimeFragment extends android.support.v4.app.Fragment {
         mDateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DatePickerFragment dialog = new DatePickerFragment();
+                DatePickerFragment dialog = DatePickerFragment
+                        .newInstance(mCrime.getDate());
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
                 dialog.show(fm, DIALOG_DATE);
             }
         });
